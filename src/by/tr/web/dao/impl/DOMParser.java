@@ -2,6 +2,7 @@ package by.tr.web.dao.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,8 @@ public class DOMParser implements Parse{
 	public List<Book> doParse() throws DAOException {
 		
 		try {
-			InputStream inputStream = getClass().getClassLoader().getResourceAsStream(FILE_XML);
+			InputStream inputStream = getClass().getClassLoader()
+					.getResourceAsStream(FILE_XML);
 	        InputSource inputSource = new InputSource(inputStream);
 	        
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -48,8 +50,10 @@ public class DOMParser implements Parse{
 	        }
 	        return lib;
 			
-		} catch (ParserConfigurationException | SAXException |IOException e) {
-			throw new DAOException(e);
+		} catch (ParserConfigurationException | SAXException e) {
+			throw new DAOException("Parser DOM error",e);
+		} catch (IOException e) {
+			throw new DAOException("File error",e);
 		} 
 	}
 	

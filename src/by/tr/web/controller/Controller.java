@@ -1,4 +1,4 @@
-package by.tr.web.dao.controller;
+package by.tr.web.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -38,13 +38,13 @@ public class Controller extends HttpServlet {
             try {
                 page = Integer.parseInt(pageNumberValue);
             } catch (NumberFormatException e) {
-                e.printStackTrace();
+            	RequestDispatcher dispatcher = request.getRequestDispatcher(ERROR);
+            	dispatcher.forward(request, response);
             }
         }
         
         try {
         	viewBooks = getListBook(parserParam, page);
-
             request.setAttribute(PARSER, parserParam);
             request.setAttribute(LIST, viewBooks);
 
@@ -56,7 +56,8 @@ public class Controller extends HttpServlet {
         }
         
 	}
-	private List<Book> getListBook(String parserParam, int page) throws ServiceException {
+	private List<Book> getListBook(String parserParam, int page) 
+			throws ServiceException {
         Service service = ServiceFactory.getInstance().getService();
         	List<Book> allBooks = service.parse(parserParam);
         	int offset = BOOKS_ON_PAGE * (page - 1);

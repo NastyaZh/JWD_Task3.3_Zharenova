@@ -34,9 +34,11 @@ public class SAXParser implements Parse{
 
             return list;
 
-        } catch (SAXException | IOException e) {
-            throw new DAOException(e);
-        }
+        } catch (SAXException e) {
+            throw new DAOException("Parser SAX error",e);
+        } catch (IOException e) {
+        	throw new DAOException("File error",e);
+		}
 	}
 
 }

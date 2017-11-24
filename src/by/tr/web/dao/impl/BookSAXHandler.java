@@ -22,8 +22,8 @@ public class BookSAXHandler extends DefaultHandler{
     }
     
     @Override
-    public void startElement(String uri, String localName, String qName, Attributes attributes)
-    		throws SAXException {
+    public void startElement(String uri, String localName, 
+    		String qName, Attributes attributes)throws SAXException {
         text = new StringBuilder();
         if (qName.equals(TagList.BOOK.toString().toLowerCase())) {
             book = new Book();
@@ -35,7 +35,8 @@ public class BookSAXHandler extends DefaultHandler{
         text.append(buffer, start, length);
     }
     
-    public void endElement(String uri, String localName, String qName) throws SAXException {
+    public void endElement(String uri, String localName, String qName) 
+    		throws SAXException {
         TagList tagName = TagList.valueOf(localName.toUpperCase());
         switch (tagName) {
         	case BOOK:{

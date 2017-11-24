@@ -28,7 +28,7 @@ public class STAXParser implements Parse{
 			reader = factory.createXMLStreamReader(inputStream);
 			return cathEvent(reader);
 		} catch (XMLStreamException e) {
-			throw new DAOException(e);
+			throw new DAOException("Parser STAX error",e);
 		}
 }
 	
